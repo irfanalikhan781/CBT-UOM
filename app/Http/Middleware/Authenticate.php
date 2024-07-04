@@ -19,6 +19,6 @@ class Authenticate extends Middleware
 
 
 
-        return route('superadmin.login'); // default route if no guard is matched
+        return route('home'); // default route if no guard is matched
     }
 }

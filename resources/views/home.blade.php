@@ -80,7 +80,7 @@
             <h1 class="h1-home">University of Malakand</h1>
             <div class="btn-container">
 
-                <a href="{{ route('candidate.dashboard') }}" class="btn">Student Dashboard</a>
+                <a href="{{ route('candidate.loginForm') }}" class="btn">Student Dashboard</a>
             </div>
         </div>
     </section>

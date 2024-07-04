@@ -10,19 +10,22 @@ class CandidateAuthController extends Controller
     //
     public function showLoginForm()
     {
-        return view('Auth.login');
+        return view('Candidate.candidate-login');
     }
 
     public function login(Request $request)
     {
-        $credentials = $request->only('login', 'password');
-        $fieldType = filter_var($credentials['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
 
-        if (Auth::guard('candidate')->attempt([$fieldType => $credentials['login'], 'password' => $credentials['password']])) {
-            return redirect()->intended(route('candidate.dashboard'));
+        if (Auth::guard('candidate')->attempt($request->only('username', 'password'))) {
+            return redirect()->route('candidate.dashboard');
         }
 
-        return redirect()->route('candidate.login')->with('error', 'Invalid credentials');
+        return redirect()->back()->withErrors(['username' => 'Invalid credentials.']);
+
     }
 
     public function logout(Request $request)

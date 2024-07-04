@@ -119,7 +119,7 @@
                         <h5>CONTROLS</h5>
                     </div>
                     <div class="text-center">
-                        <a href="" class="btn create-test rounded-pill mt-2">CREATE TEST</a>
+                        <a href="{{ route('createTestForm') }}" class="btn create-test rounded-pill mt-2">CREATE TEST</a>
                         <a href="{{ route('addDepartment') }}" class="btn add-deptt rounded-pill mt-2"><i
                                 class="fa-solid fa-circle-plus"></i>
                             Add
@@ -132,7 +132,7 @@
                                 class="fa-solid fa-circle-plus"></i>
                             Add
                             Course</a>
-                        <a href="{{ route('mcqs.upload.form') }}" class="btn add-mcqs rounded-pill mt-2"><i
+                        <a href="{{ route('get-upload-mcqs-form') }}" class="btn add-mcqs rounded-pill mt-2"><i
                                 class="fa-solid fa-circle-plus"></i> Add
                             MCQs</a>
                         <a href="{{ route('show-upload-candidates-form') }}" class="btn add-course rounded-pill mt-2"><i

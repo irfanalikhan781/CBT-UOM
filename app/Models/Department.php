@@ -28,4 +28,9 @@ class Department extends Model
     {
         return $this->hasMany(McqsBank::class);
     }
+
+    public function tests()
+    {
+        return $this->hasMany(Test::class);
+    }
 }

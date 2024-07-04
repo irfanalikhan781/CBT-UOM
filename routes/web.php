@@ -8,7 +8,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\McqsBankController;
 use App\Http\Controllers\McqsController;
 use App\Http\Controllers\ProgramController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CandidateAuthController;
 use App\Http\Controllers\SubAdminAuthController;
@@ -108,11 +108,26 @@ Route::post('/Admin/addMcqs', [McqsController::class, 'store'])->name('mcqs.uplo
 
 Route::post('/mcqs/format', [McqsController::class, 'switchFormat'])->name('mcqs.switchFormat');
 
+//Test creation
+Route::get('/Admin/createtest', [TestController::class, 'create'])->name('createTestForm');
+Route::post('/Admin/createtest', [TestController::class, 'store'])->name('tests.store');
+Route::get('/Admin/preparedTests', [TestController::class, 'showPreparedTests'])->name('preparedTests');
+Route::delete('/Admin/preparedTests/{id}', [TestController::class, 'destroy'])->name('tests.destroy');
 
 
 
-// Student Dashboard Route
-Route::get('Candidate/dashboard', [CandidateController::class, 'index'])->name('candidate.dashboard');
+
+// Candidates pages Routes
+Route::get('/candidate/loginForm', [CandidateAuthController::class, 'showLoginForm'])->name('candidate.loginForm');
+Route::post('/candidate/loginForm', [CandidateAuthController::class, 'login'])->name('candidate.login');
+Route::middleware(['auth:candidate'])->group(function () {
+    Route::get('Candidate/dashboard', [CandidateController::class, 'dashboard'])->name('candidate.dashboard');
+    Route::post('/candidate/start-demo', [CandidateController::class, 'startDemo'])->name('candidate.start-demo');
+    Route::post('/candidate/submit-demo', [CandidateController::class, 'submitDemo'])->name('candidate.submit-demo');
+    Route::get('/test/{department_id}', [CandidateController::class, 'startTest'])->name('candidate.startTest');
+    Route::post('/test/{test}', [CandidateController::class, 'storeTestResults'])->name('candidate.storeTestResults');
+});
+
 
 //Upload candidates file
 Route::get('/Admin/addCandidatesForm', [CandidateController::class, 'showUploadForm'])->name('show-upload-candidates-form');

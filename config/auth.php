@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'candidate' => [
+            'driver' => 'session',
+            'provider' => 'candidates',
+        ],
 
     ],
 
@@ -104,9 +108,9 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_reset_tokens',
+        'candidates' => [
+            'provider' => 'candidates',
+            'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],

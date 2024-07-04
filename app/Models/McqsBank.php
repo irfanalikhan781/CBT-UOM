@@ -11,8 +11,8 @@ class McqsBank extends Model
     protected $fillable = [
         'question',
         'option1',
+        'option2',
         'option3',
-        'option4',
         'option4',
         'answer',
         'course_id',
@@ -27,5 +27,10 @@ class McqsBank extends Model
     public function departments()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function tests()
+    {
+        return $this->belongsToMany(Test::class, 'test_mcqs', 'mcq_id', 'test_id')->withTimestamps();
     }
 }

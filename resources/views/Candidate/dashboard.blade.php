@@ -3,7 +3,7 @@
     <style>
         .hero-title {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin-top: 5rem;
+            margin-top: 2rem;
         }
 
         .hero-title h1 {
@@ -18,10 +18,8 @@
             margin-top: 3rem;
         }
 
-        .departments-dropdown {
-            width: 20rem;
-            border: solid seagreen 2px;
-            border-radius: 8px
+        form {
+            width: 50%;
         }
 
         select .form-select {
@@ -35,7 +33,8 @@
             <div class="col-8">
                 <div class="hero-title">
                     <h1>Welcome </h1>
-                    <h3>Computer Based Test UOM</h3>
+                    <h2>{{ $candidate->name }}</h2>
+                    <h3>to Computer Based Test UOM</h3>
                 </div>
             </div>
             <div class="col-6 instructions">
@@ -47,15 +46,20 @@
                         attempted</li>
                 </ul>
             </div>
-            <div class="dropdown mt-2">
-                <div class="departments-dropdown">
-                    <select class="form-select" aria-label="Default select example" name="department_id">
-                        <option selected>Select Department</option>
-                        @foreach ($departments as $department)
-                            <option class="" value="{{ $department->id }}">{{ $department->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+            <div>
+                <form action="{{ route('candidate.start-demo') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="department" class="mb-2">Select Your Department</label>
+                        <select name="department_id" id="department" class="form-select" required>
+                            <option value="">Select Department</option>
+                            @foreach ($departmentsWithTests as $department)
+                                <option value="{{ $department->id }}">{{ $department->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success mt-3">Start Demo Test</button>
+                </form>
             </div>
         </div>
 

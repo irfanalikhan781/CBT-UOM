@@ -30,9 +30,9 @@
         }
 
         /* section .row {
-                                justify-content: unset;
+                                            justify-content: unset;
 
-                            } */
+                                        } */
         aside {
             background-color: #f8f9fa;
             height: 100%;
@@ -93,7 +93,7 @@
                         <p class="mb-1"><b>Roll No:</b> 123</p>
                         <p><b>CNIC:</b> 7439734937539</p>
                     </div>
-                    <div class="counter">
+                    {{-- <div class="counter">
                         <div class="counter-title py-2 mx-5 my-3">
                             <h5>MCQs Counter</h5>
                         </div>
@@ -104,7 +104,7 @@
                                 </div>
                             @endfor
                         </div>
-                    </div>
+                    </div> --}}
                 </aside>
             </div>
 
