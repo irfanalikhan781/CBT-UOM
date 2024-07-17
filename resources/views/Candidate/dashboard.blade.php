@@ -18,12 +18,21 @@
             margin-top: 3rem;
         }
 
+        .buttons {
+            display: flex;
+        }
+
         form {
-            width: 50%;
+            /* width: 50%; */
         }
 
         select .form-select {
             background-color: seagreen;
+        }
+
+        .skip-button a {
+            text-decoration: none;
+            color: white;
         }
     </style>
 @endsection
@@ -46,10 +55,10 @@
                         attempted</li>
                 </ul>
             </div>
-            <div>
+            <div class="buttons">
                 <form action="{{ route('candidate.start-demo') }}" method="POST">
                     @csrf
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="department" class="mb-2">Select Your Department</label>
                         <select name="department_id" id="department" class="form-select" required>
                             <option value="">Select Department</option>
@@ -57,9 +66,13 @@
                                 <option value="{{ $department->id }}">{{ $department->name }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <button type="submit" class="btn btn-success mt-3">Start Demo Test</button>
                 </form>
+                <div class="skip-button mt-3 mx-3">
+                    <button type="button" class="btn btn-info"><a href="{{ route('department-selection-page') }}">Skip Demo
+                            Test</a></button>
+                </div>
             </div>
         </div>
 

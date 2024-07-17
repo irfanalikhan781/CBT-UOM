@@ -11,7 +11,9 @@ class Test extends Model
     protected $fillable = [
         'name',
         'department_id',
+        'admin_id',
         'total_mcqs',
+        'duration'
     ];
 
     public function department()
@@ -19,8 +21,17 @@ class Test extends Model
         return $this->belongsTo(Department::class);
     }
 
+    public function admins()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id');
+    }
+
     public function mcqs()
     {
         return $this->belongsToMany(McqsBank::class, 'test_mcqs', 'test_id', 'mcq_id')->withTimestamps();
+    }
+    public function results()
+    {
+        return $this->hasMany(Result::class);
     }
 }

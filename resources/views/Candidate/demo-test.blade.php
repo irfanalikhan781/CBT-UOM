@@ -11,7 +11,6 @@
             <h2 class="my-3">Demo Test</h2>
             <form action="{{ route('candidate.submit-demo') }}" method="POST">
                 @csrf
-                <input type="hidden" name="department_id" value="{{ $departmentId }}">
                 @foreach ($demoMcqs as $index => $mcq)
                     <div class="mb-3">
                         <p>{{ $index + 1 }}. {{ $mcq['question'] }}</p>

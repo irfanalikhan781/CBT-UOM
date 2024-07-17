@@ -4,36 +4,43 @@
 
 @section('admin_content')
     <section class="col-9">
-        <div class="container mt-4">
-            <h5>Departments with Prepared Tests</h5>
-            <table class="table table-striped">
-                <thead class="table-primary">
+        <h5 class="mt-3">Prepared Tests</h5>
+
+        @if ($tests->isEmpty())
+            <div class="alert alert-info">
+                No tests have been prepared yet.
+            </div>
+        @else
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Department Name</th>
-                        <th scope="col">Actions</th>
+                        <th>Test Name</th>
+                        <th>Department</th>
+                        <th>Admin</th>
+                        <th>Total MCQs</th>
+                        <th>Duration (minutes)</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($departmentsWithTests as $departmentId => $tests)
+                    @foreach ($tests as $test)
                         <tr>
-                            <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $tests->first()->department->name }}</td>
+                            <td>{{ $test->name }}</td>
+                            <td>{{ $test->department->name }}</td>
+                            <td>{{ $test->admins->name }}</td>
+                            <td>{{ $test->total_mcqs }}</td>
+                            <td>{{ $test->duration }}</td>
                             <td>
-                                <form id="deleteForm{{ $tests->first()->id }}"
-                                    action="{{ route('tests.destroy', $tests->first()->id) }}" method="POST">
+                                <form action="{{ route('tests.destroy', $test->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-btn">
-                                        Delete
-                                    </button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-        </div>
-
+        @endif
     </section>
 @endsection

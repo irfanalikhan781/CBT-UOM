@@ -7,6 +7,7 @@ use App\Models\Mcq;
 use Illuminate\Http\Request;
 use App\Models\Department;
 use App\Models\Course;
+use App\Models\Result;
 
 class AdminController extends Controller
 {
@@ -21,6 +22,15 @@ class AdminController extends Controller
         $count_candidates = Candidate::count();
         $count_mcqs = Mcq::count();
         return view('Admin.dashboard', compact('count', 'count_courses', 'count_candidates', 'count_mcqs'));
+    }
+
+    //Route for Searching a specific candidate result.
+    public function searchResults(Request $request)
+    {
+        $username = $request->input('username');
+        $results = Result::where('candidate_username', 'like', '%' . $username . '%')->get();
+
+        return view('Admin.results', compact('results'));
     }
 
     /**

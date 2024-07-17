@@ -3,101 +3,101 @@
     <style>
         /* Dashboard Navigation Panel */
         /* .nav {
-                                                                                                                                                                                    width: 100%;
-                                                                                                                                                                                    height: 60px;
-                                                                                                                                                                                    background-color: #750E21;
-                                                                                                                                                                                    position: relative;
-                                                                                                                                                                                    display: flex;
-                                                                                                                                                                                }
+                                                                                                                                                                                                            width: 100%;
+                                                                                                                                                                                                            height: 60px;
+                                                                                                                                                                                                            background-color: #750E21;
+                                                                                                                                                                                                            position: relative;
+                                                                                                                                                                                                            display: flex;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                .dashboard {
-                                                                                                                                                                                    position: absolute;
-                                                                                                                                                                                    left: 500;
-                                                                                                                                                                                    top: 10;
-                                                                                                                                                                                    color: white;
-                                                                                                                                                                                }
+                                                                                                                                                                                                        .dashboard {
+                                                                                                                                                                                                            position: absolute;
+                                                                                                                                                                                                            left: 500;
+                                                                                                                                                                                                            top: 10;
+                                                                                                                                                                                                            color: white;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                .logout {
-                                                                                                                                                                                    position: absolute;
-                                                                                                                                                                                    right: 10;
-                                                                                                                                                                                    top: 12;
-                                                                                                                                                                                }
+                                                                                                                                                                                                        .logout {
+                                                                                                                                                                                                            position: absolute;
+                                                                                                                                                                                                            right: 10;
+                                                                                                                                                                                                            top: 12;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                .logout a {
-                                                                                                                                                                                    text-decoration: none;
-                                                                                                                                                                                    color: white;
-                                                                                                                                                                                    background-color: #ff9900;
-                                                                                                                                                                                }
+                                                                                                                                                                                                        .logout a {
+                                                                                                                                                                                                            text-decoration: none;
+                                                                                                                                                                                                            color: white;
+                                                                                                                                                                                                            background-color: #ff9900;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                section {}
+                                                                                                                                                                                                        section {}
 
-                                                                                                                                                                                aside {
-                                                                                                                                                                                    background-color: #f8f9fa;
-                                                                                                                                                                                    height: 100vh;
+                                                                                                                                                                                                        aside {
+                                                                                                                                                                                                            background-color: #f8f9fa;
+                                                                                                                                                                                                            height: 100vh;
 
-                                                                                                                                                                                }
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                aside .heading {
-                                                                                                                                                                                    text-align: center;
-                                                                                                                                                                                    background-color: #0C2D57;
-                                                                                                                                                                                    color: white;
-                                                                                                                                                                                }
+                                                                                                                                                                                                        aside .heading {
+                                                                                                                                                                                                            text-align: center;
+                                                                                                                                                                                                            background-color: #0C2D57;
+                                                                                                                                                                                                            color: white;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                aside .create-test {
-                                                                                                                                                                                    background-color: #BE3144;
-                                                                                                                                                                                    color: white;
-                                                                                                                                                                                    width: 200px;
-                                                                                                                                                                                }
+                                                                                                                                                                                                        aside .create-test {
+                                                                                                                                                                                                            background-color: #BE3144;
+                                                                                                                                                                                                            color: white;
+                                                                                                                                                                                                            width: 200px;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                aside .create-test:hover {
-                                                                                                                                                                                    background-color: #ff9900;
-                                                                                                                                                                                    color: white;
-                                                                                                                                                                                }
+                                                                                                                                                                                                        aside .create-test:hover {
+                                                                                                                                                                                                            background-color: #ff9900;
+                                                                                                                                                                                                            color: white;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                aside .add-deptt {
-                                                                                                                                                                                    background-color: #DDE6ED;
-                                                                                                                                                                                    width: 200px;
-                                                                                                                                                                                }
+                                                                                                                                                                                                        aside .add-deptt {
+                                                                                                                                                                                                            background-color: #DDE6ED;
+                                                                                                                                                                                                            width: 200px;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                aside .add-deptt:hover {
-                                                                                                                                                                                    background-color: #526D82;
-                                                                                                                                                                                    color: white;
-                                                                                                                                                                                }
+                                                                                                                                                                                                        aside .add-deptt:hover {
+                                                                                                                                                                                                            background-color: #526D82;
+                                                                                                                                                                                                            color: white;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                aside .add-course {
-                                                                                                                                                                                    background-color: #DDE6ED;
-                                                                                                                                                                                    width: 200px;
-                                                                                                                                                                                }
+                                                                                                                                                                                                        aside .add-course {
+                                                                                                                                                                                                            background-color: #DDE6ED;
+                                                                                                                                                                                                            width: 200px;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                aside .add-course:hover {
-                                                                                                                                                                                    background-color: #526D82;
-                                                                                                                                                                                    color: white;
-                                                                                                                                                                                }
+                                                                                                                                                                                                        aside .add-course:hover {
+                                                                                                                                                                                                            background-color: #526D82;
+                                                                                                                                                                                                            color: white;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                aside .add-mcqs {
-                                                                                                                                                                                    background-color: #DDE6ED;
-                                                                                                                                                                                    width: 200px;
-                                                                                                                                                                                }
+                                                                                                                                                                                                        aside .add-mcqs {
+                                                                                                                                                                                                            background-color: #DDE6ED;
+                                                                                                                                                                                                            width: 200px;
+                                                                                                                                                                                                        }
 
-                                                                                                                                                                                aside .add-mcqs:hover {
-                                                                                                                                                                                    background-color: #526D82;
-                                                                                                                                                                                    color: white;
-                                                                                                                                                                                } */
+                                                                                                                                                                                                        aside .add-mcqs:hover {
+                                                                                                                                                                                                            background-color: #526D82;
+                                                                                                                                                                                                            color: white;
+                                                                                                                                                                                                        } */
 
         .row {
             justify-content: space-around
         }
 
         /* .card {
-                                                                                                                                    height: 260px;
-                                                                                                                                } */
+                                                                                                                                                            height: 260px;
+                                                                                                                                                        } */
 
         /* .card img {
-                                                                                                                                    z-index: -1;
-                                                                                                                                    width: 200px;
-                                                                                                                                    height: 180px;
-                                                                                                                                    opacity: 0.3;
-                                                                                                                                } */
+                                                                                                                                                            z-index: -1;
+                                                                                                                                                            width: 200px;
+                                                                                                                                                            height: 180px;
+                                                                                                                                                            opacity: 0.3;
+                                                                                                                                                        } */
 
         .card-body .text {
             display: flex;
@@ -149,6 +149,12 @@
 
         .preparedtests-card {
             background-color: #DA0C81;
+            color: white;
+            width: 260px;
+        }
+
+        .results-card {
+            background-color: #344C64;
             color: white;
             width: 260px;
         }
@@ -232,6 +238,19 @@
                     <div class="text">
                         <a href="{{ route('preparedTests') }}">
                             <h5>Prepared Tests</h5>
+                        </a>
+                        <span>
+                            <h5></h5>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="card col-3 border m-2 rounded results-card">
+                <div class="card-body mt-2">
+                    {{-- <img src="/images/courses-icon.png" class="" alt=""> --}}
+                    <div class="text">
+                        <a href="{{ route('Admin.results') }}">
+                            <h5>Results</h5>
                         </a>
                         <span>
                             <h5></h5>

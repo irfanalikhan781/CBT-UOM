@@ -21,4 +21,5 @@ class Authenticate extends Middleware
 
         return route('home'); // default route if no guard is matched
     }
+
 }

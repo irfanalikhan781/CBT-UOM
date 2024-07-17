@@ -30,9 +30,9 @@
         <form action="{{ route('tests.store') }}" method="post" class="form">
             @csrf
             <h5 class="mt-3">Create Test</h5>
-            <div class="form-group">
-                <label for="name">Test Name</label>
-                <input type="text" name="name" id="name" class="form-control" required>
+            <div class="mb-3">
+                <label for="name" class="form-label">Test Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
             </div>
 
             <div class="form-group">
@@ -52,6 +52,10 @@
             <div class="form-group mt-3 total-number-of-mcqs">
                 <label for="total_mcqs ">Total Number of MCQs</label>
                 <input type="number" name="total_mcqs" id="total_mcqs" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="duration" class="form-label">Duration (in minutes)</label>
+                <input type="number" class="form-control" id="duration" name="duration" required>
             </div>
 
             <button type="submit" class="btn btn-danger my-2">Create Test</button>

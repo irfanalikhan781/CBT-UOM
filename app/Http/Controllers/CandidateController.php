@@ -27,20 +27,15 @@ class CandidateController extends Controller
     {
         //
         $candidate = Auth::guard('candidate')->user();
-        $departmentsWithTests = Department::whereHas('tests')->get();
-        return view('Candidate.dashboard', compact('departmentsWithTests', 'candidate'));
+        // $departmentsWithTests = Department::whereHas('tests')->get();
+        return view('Candidate.dashboard', compact('candidate'));
     }
 
     public function startDemo(Request $request)
     {
-        $request->validate([
-            'department_id' => 'required|exists:departments,id',
-        ]);
-
-        $departmentId = $request->input('department_id');
         $demoMcqs = $this->getStaticDemoMcqs();
 
-        return view('candidate.demo-test', compact('demoMcqs', 'departmentId'));
+        return view('candidate.demo-test', compact('demoMcqs'));
     }
 
     public function submitDemo(Request $request)
@@ -105,80 +100,167 @@ class CandidateController extends Controller
         ];
     }
 
-    public function startTest(Request $request, $department_id)
+    public function departmentSelectionPage()
     {
-        $candidate = auth()->user();
-        $department = Department::findOrFail($department_id);
-        $test = $department->tests()->first();
-        if (!$test) {
-            \Log::error('No test available for department ID: ' . $department_id);
-            return redirect()->back()->with('error', 'No test available for this department.');
-        }
-
-        if (Result::where('candidate_id', $candidate->id)->exists()) {
-            \Log::info('Candidate ID: ' . $candidate->id . ' has already taken Test ID: ' . $test->id);
-            return redirect()->back()->with('error', 'You have already taken this test.');
-        }
-
-        // Fetch the test's MCQs
-        $mcqs = $test->mcqs()->inRandomOrder()->get();
-
-        if ($mcqs->isEmpty()) {
-            \Log::error('No MCQs found for Test ID: ' . $test->id);
-        } else {
-            \Log::info('MCQs fetched for Test ID: ' . $test->id);
-        }
-
-        // Paginate the MCQs
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 10;
-        $currentItems = $mcqs->slice(($currentPage - 1) * $perPage, $perPage);
-        $paginatedMcqs = new LengthAwarePaginator($currentItems, $mcqs->count(), $perPage, $currentPage, [
-            'path' => LengthAwarePaginator::resolveCurrentPath(),
+        $departments = Department::whereHas('tests')->get();
+        return view('Candidate.select-department', compact('departments'));
+    }
+    public function selectDepartment(Request $request)
+    {
+        $request->validate([
+            'department_id' => 'required|exists:departments,id',
         ]);
 
-        return view('candidate.test', compact('test', 'paginatedMcqs', 'candidate'));
+        $departmentId = $request->department_id;
+        $test = Test::where('department_id', $departmentId)->first();
+
+        if (!$test) {
+            return redirect()->route('candidate.dashboard')->with('error', 'No test found for the selected department.');
+        }
+
+        return redirect()->route('candidate.preTest', ['test_id' => $test->id]);
     }
 
+    public function preTest($test_id)
+    {
 
+        $test = Test::findOrFail($test_id);
+        return view('Candidate.pre-test-page', compact('test'));
+    }
 
+    public function startTest($test_id)
+    {
+        $test = Test::findOrFail($test_id);
+        $mcqs = $test->mcqs()->get();
 
-    // public function showTest(Request $request)
+        // Ensure only the number of MCQs specified in the test is fetched
+        if ($mcqs->count() > $test->total_mcqs) {
+            $mcqs = $mcqs->random($test->total_mcqs);
+        }
+
+        return view('Candidate.test', compact('test', 'mcqs'));
+    }
+    // public function startTest($test_id)
     // {
-    //     $candidate = Auth::guard('candidate')->user();
-    //     $test = Test::where('department_id', $request->department_id)->where('is_demo', false)->first();
-
-    //     if (!$test) {
-    //         return redirect()->route('candidate.dashboard')->with('error', 'No test available for your department.');
-    //     }
-
-    //     $mcqs = $test->mcqs()->inRandomOrder()->get();
-    //     return view('candidate.test', compact('test', 'mcqs'));
+    //     $test = Test::findOrFail($test_id);
+    //     $mcqs = $test->mcqs()->get();
+    //     return view('Candidate.test', compact('test', 'mcqs'));
     // }
 
-    public function storeTestResults(Request $request, Test $test)
-    {
-        $candidate = auth()->user();
-        $score = 0;
+    // public function startTest(Request $request, $department_id)
+    // {
+    //     $candidate = auth()->user();
+    //     $department = Department::findOrFail($department_id);
+    //     $test = $department->tests()->first();
+    //     if (!$test) {
+    //         \Log::error('No test available for department ID: ' . $department_id);
+    //         return redirect()->back()->with('error', 'No test available for this department.');
+    //     }
 
-        foreach ($request->mcqs as $mcqId => $answer) {
-            $mcq = McqsBank::find($mcqId);
-            if ($mcq && $mcq->correct_answer == $answer) {
-                $score++;
+    //     if (Result::where('candidate_id', $candidate->id)->exists()) {
+    //         \Log::info('Candidate ID: ' . $candidate->id . ' has already taken Test ID: ' . $test->id);
+    //         return redirect()->back()->with('error', 'You have already taken this test.');
+    //     }
+
+    //     // Fetch the test's MCQs
+    //     $mcqs = $test->mcqs()->inRandomOrder()->get();
+
+    //     if ($mcqs->isEmpty()) {
+    //         \Log::error('No MCQs found for Test ID: ' . $test->id);
+    //     } else {
+    //         \Log::info('MCQs fetched for Test ID: ' . $test->id);
+    //     }
+
+    //     // Paginate the MCQs
+    //     $currentPage = LengthAwarePaginator::resolveCurrentPage();
+    //     $perPage = 10;
+    //     $currentItems = $mcqs->slice(($currentPage - 1) * $perPage, $perPage);
+    //     $paginatedMcqs = new LengthAwarePaginator($currentItems, $mcqs->count(), $perPage, $currentPage, [
+    //         'path' => LengthAwarePaginator::resolveCurrentPath(),
+    //     ]);
+
+    //     return view('candidate.test', compact('test', 'paginatedMcqs', 'candidate'));
+    // }
+
+
+
+
+    public function showTest(Request $request)
+    {
+        $candidate = Auth::guard('candidate')->user();
+        $test = Test::where('department_id', $request->department_id)->where('is_demo', false)->first();
+
+        if (!$test) {
+            return redirect()->route('candidate.dashboard')->with('error', 'No test available for your department.');
+        }
+
+        $mcqs = $test->mcqs()->inRandomOrder()->get();
+        return view('candidate.test', compact('test', 'mcqs'));
+    }
+
+    public function submitTest(Request $request, $test_id)
+    {
+        // Find the test and its associated MCQs
+        $test = Test::findOrFail($test_id);
+        $mcqs = $test->mcqs()->get();
+        $answers = $request->input('answers');
+
+        // Calculate the candidate's score
+        $score = 0;
+        foreach ($mcqs as $mcq) {
+            if (isset($answers[$mcq->id])) {
+                $selectedOption = $answers[$mcq->id];
+                // Map the selected option to 'A', 'B', 'C', 'D'
+                $optionMap = [
+                    'option1' => 'A',
+                    'option2' => 'B',
+                    'option3' => 'C',
+                    'option4' => 'D',
+                ];
+                if ($optionMap[$selectedOption] == $mcq->answer) {
+                    $score++;
+                }
             }
         }
 
-        // Save the test result
-        Result::create([
-            'candidate_id' => $candidate->id,
-            'candidate_name' => $candidate->name,
-            'candidate_username' => $candidate->username,
-            'department_id' => $test->department_id,
-            'score' => $score,
-        ]);
+        // Get the authenticated candidate
+        $candidate = Auth::guard('candidate')->user();
 
-        return redirect()->route('candidate.dashboard')->with('success', 'Test completed successfully.');
+        // Check if the result already exists for the candidate and test
+        $result = Result::where('candidate_id', $candidate->id)
+            ->where('test_id', $test_id)
+            ->first();
+
+        if ($result) {
+            // Update the existing result
+            $result->update([
+                'score' => $score,
+            ]);
+        } else {
+            // Create a new result
+            Result::create([
+                'candidate_id' => $candidate->id,
+                'candidate_name' => $candidate->name,
+                'candidate_username' => $candidate->username,
+                'department_id' => $test->department_id,
+                'test_id' => $test->id,
+                'score' => $score,
+            ]);
+        }
+
+        // Determine the submission type
+        $submission_type = $request->input('submission_type', 'manual'); // Default to 'manual' if not provided
+
+        // Clear the session data related to the test
+        $request->session()->forget('test_data');
+
+        // Return the test-submitted view with the submission type and score
+        return view('Candidate.test-submitted', compact('submission_type', 'score'));
     }
+
+
+
+
     /**
      * Store a newly created resource in storage.
      */

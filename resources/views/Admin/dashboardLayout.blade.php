@@ -103,10 +103,10 @@
 @section('content')
     <div class="nav">
 
-        <h3 class="dashboard"><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></h3>
-        <form class="logout" method="GET" action="">
+        <h3 class="dashboard"><a href="{{ route('admin.showLoginForm') }}">Admin Dashboard</a></h3>
+        <form class="logout" method="POST" action="{{ route('admin.logout') }}">
             @csrf
-            <button class="btn" type="sumit">LOG OUT</button>
+            <button class="btn" type="submit">LOG OUT</button>
         </form>
 
 
@@ -114,7 +114,7 @@
     <section class="main">
         <div class="row">
             <div class="col-3 ">
-                <aside class="shadow">
+                <aside class="shadow pb-3">
                     <div class="heading py-2">
                         <h5>CONTROLS</h5>
                     </div>

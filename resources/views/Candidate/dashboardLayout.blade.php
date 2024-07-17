@@ -9,9 +9,16 @@
             display: flex;
         }
 
+        .nav form {
+            width: 10%;
+        }
+
         .title {
+            position: absolute;
+            left: 500;
+            top: 10;
             color: white;
-            margin: auto;
+
         }
 
         .logout {
@@ -30,9 +37,9 @@
         }
 
         /* section .row {
-                                            justify-content: unset;
+                                                                                        justify-content: unset;
 
-                                        } */
+                                                                                    } */
         aside {
             background-color: #f8f9fa;
             height: 100%;
@@ -71,9 +78,9 @@
     <div class="nav">
 
         <h3 class="title">CBT University of Malakand</h3>
-        <form class="logout" method="GET" action="">
+        <form class="logout" method="POST" action="{{ route('candidate.logout') }}">
             @csrf
-            <button class="btn" type="sumit">LOG OUT</button>
+            <button class="btn" type="submit">LOG OUT</button>
         </form>
 
 

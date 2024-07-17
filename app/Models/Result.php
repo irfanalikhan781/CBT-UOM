@@ -13,6 +13,7 @@ class Result extends Model
         'candidate_name',
         'candidate_username',
         'department_id',
+        'test_id',
         'score',
     ];
 
@@ -24,5 +25,9 @@ class Result extends Model
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+    public function test()
+    {
+        return $this->belongsTo(Test::class);
     }
 }

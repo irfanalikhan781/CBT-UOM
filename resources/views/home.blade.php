@@ -63,13 +63,19 @@
             background-color: #E65C19;
         }
 
+        .admin_btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
         /* Home Page Styling Ends */
     </style>
 @endsection
 @section('content')
     <section class="body-home overlay">
         <div>
-            <div class="admin_btn"><a href="{{ route('admin.dashboard') }}" class="btn">Admin Dashboard</a>
+            <div class="admin_btn"><a href="{{ route('admin.showLoginForm') }}" class="btn">Admin Dashboard</a>
             </div>
             <div class="logo">
                 <img src="images/UOMlogo.png" alt="">
