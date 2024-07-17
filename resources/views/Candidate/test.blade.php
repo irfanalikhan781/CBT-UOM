@@ -2,7 +2,7 @@
 @section('candidate_page_styles')
     <style>
         .clock {
-            background-color: aquamarine;
+            background-color: #A91D3A;
             display: flex;
             width: 12%;
             padding-left: 10px;
@@ -10,6 +10,7 @@
             position: fixed;
             right: 0;
             border-radius: 12px;
+            color: white;
         }
     </style>
 @endsection
@@ -64,6 +65,18 @@
         window.addEventListener('beforeunload', function(e) {
             e.preventDefault();
             e.returnValue = '';
+        });
+
+        // Disable other browser controls (e.g., toolbar, right-click menu)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.altKey || e.metaKey) {
+                e.preventDefault();
+            }
         });
 
         // Test timer logic

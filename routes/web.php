@@ -119,6 +119,8 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::get('/Admin/results', [TestController::class, 'results'])->name('Admin.results');
     Route::get('/admin/search-results', [AdminController::class, 'searchResults'])->name('admin.searchResults');
+    Route::post('/admin/export-results', [TestController::class, 'exportResults'])->name('admin.exportResults');
+
 
 
 });
